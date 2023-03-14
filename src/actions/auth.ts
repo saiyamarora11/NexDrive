@@ -2,6 +2,7 @@
 import {
   signInWithPhoneNumber,
   RecaptchaVerifier,
+  ConfirmationResult,
 } from "firebase/auth";
 
 //store
@@ -47,15 +48,27 @@ export const sendOTP = async (
   }
 };
 
-export const verifyOTP = async () => {
-  const confirmationResult = JSON.parse(localStorage.getItem('confirmationResult') || '');
-  try {
-    await confirmationResult.confirm(verificationCode.value);
-    console.log('OTP verified successfully!');
-  } catch (error) {
-    console.error(error);
-  }
-};
 
+
+export const verifyOTP = async (args: {
+  otp: string;
+  confirmationResult: ConfirmationResult;
+}) => {
+  const authStore = useAuthStore();
+  args.confirmationResult
+    .confirm(args.otp)
+    .then(async (result:any) => {
+      console.log("otp verification result", result)
+
+    })
+    .catch((reason:any) => {
+      authStore.setIsOTPVerified(false);
+      alert("Invalid Otp Verification");
+      console.log("otp verification cause", reason?.cause);
+    })
+    .finally(() => {
+      authStore.toggleVerificationStarted(false);
+    });
+};
 
 

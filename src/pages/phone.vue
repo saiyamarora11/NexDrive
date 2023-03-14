@@ -7,7 +7,6 @@ import router from "../router";
 
 //store,actions
 import { sendOTP } from "../actions/auth";
-import { getCurrentUser } from "../firebase";
 import { useAuthStore } from "../store/auth";
 import { useUserStore } from "../store/user";
 
@@ -21,16 +20,6 @@ const otpSent = ref<boolean>(false);
 
 const phoneNo = ref<string>("");
 
-const phoneRegExp = /^[6-9]\d{9}$/;
-
-const schema = yup.object().shape({
-  phoneNo: yup.string().matches(phoneRegExp, "Phone number is not valid"),
-});
-
-// function submitHandler() {
-//   const customerPhone = phoneNo.value.split(" ").join("");
-//   router.push("/otp");
-// }
 const submitHandler = async () => {
   const customerPhone = phoneNo.value.split(" ").join("");
   console.log(customerPhone);
@@ -42,7 +31,7 @@ const submitHandler = async () => {
 
   otpSent.value = true;
 
-  await sendOTP(customerPhone, (val: any) => {
+  await sendOTP("+919873169858", (val: any) => {
     authStore.setLoginConfirmationResult(val);
   });
   customerStore.setPhoneNumber(customerPhone);
@@ -68,44 +57,38 @@ watch(
       <ArrowLeft class="w-6 mt-6 ml-4" />
     </button>
     <div class="font-bold text-2xl mt-4 ml-4">Enter your mobile number to get OTP</div>
-    <div  id="recaptcha-container">
-      <Form
-      id="recaptcha-container"
-      @submit="submitHandler"
-      :validation-schema="schema"
-      v-slot="{ errors }"
-    >
-      <div class="mt-6 mx-8">
-        <div class="relative mt-3">
-          <Field
-            v-model="phoneNo"
-            name="phoneNo"
-            placeholder="10 digit mobile number"
-            class="w-full border-emerald-500 border rounded-md py-2 px-4 bg-white focus:outline-none"
-            type="number"
-            autocomplete="off"
-            :class="{ 'is-invalid': errors.phoneNo }"
-          />
+    <div id="recaptcha-container">
+      <Form id="recaptcha-container" @submit="submitHandler" v-slot="{ errors }">
+        <div class="mt-6 mx-8">
+          <div class="relative mt-3">
+            <Field
+              v-model="phoneNo"
+              name="phoneNo"
+              placeholder="10 digit mobile number"
+              class="w-full border-emerald-500 border rounded-md py-2 px-4 bg-white focus:outline-none"
+              type="number"
+              autocomplete="off"
+              :class="{ 'is-invalid': errors.phoneNo }"
+            />
 
-          <label
-            class="absolute left-0 -top-3.5 text-emerald-500 text-sm bg-white px-1.5 text-emerald-500"
-          >
-            Mobile Number
-          </label>
+            <label
+              class="absolute left-0 -top-3.5 text-emerald-500 text-sm bg-white px-1.5 text-emerald-500"
+            >
+              Mobile Number
+            </label>
+          </div>
         </div>
-      </div>
-      <ErrorMessage name="phoneNo" class="validation-error ml-10" />
-      <div class="mt-6 mx-8">
-        <button
-          class="w-full btn bg-emerald-500 hover:bg-emerald-500 h-10 rounded-lg"
-          type="submit"
-        >
-          Get OTP
-        </button>
-      </div>
-    </Form>
+        <ErrorMessage name="phoneNo" class="validation-error ml-10" />
+        <div class="mt-6 mx-8">
+          <button
+            class="w-full btn bg-emerald-500 hover:bg-emerald-500 h-10 rounded-lg"
+            type="submit"
+          >
+            Get OTP
+          </button>
+        </div>
+      </Form>
     </div>
-
   </div>
 </template>
 
