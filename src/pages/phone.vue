@@ -1,26 +1,65 @@
 <script setup lang="ts">
 //dependencies
-import { ref} from "vue";
+import { ref, watch } from "vue";
 import { Form, Field, ErrorMessage } from "vee-validate";
 import * as yup from "yup";
 import router from "../router";
 
+//store,actions
+import { sendOTP } from "../actions/auth";
+import { getCurrentUser } from "../firebase";
+import { useAuthStore } from "../store/auth";
+import { useUserStore } from "../store/user";
+
 //imports
 import ArrowLeft from "../assets/arrow-left.svg?component";
+import Spinner from "../components/common/Spinner.vue";
+
+const customerStore = useUserStore();
+const authStore = useAuthStore();
+const otpSent = ref<boolean>(false);
 
 const phoneNo = ref<string>("");
 
 const phoneRegExp = /^[6-9]\d{9}$/;
 
-
 const schema = yup.object().shape({
   phoneNo: yup.string().matches(phoneRegExp, "Phone number is not valid"),
 });
 
-function submitHandler() {
+// function submitHandler() {
+//   const customerPhone = phoneNo.value.split(" ").join("");
+//   router.push("/otp");
+// }
+const submitHandler = async () => {
   const customerPhone = phoneNo.value.split(" ").join("");
-  router.push("/otp");
-}
+  console.log(customerPhone);
+  const recaptchaDiv = document.createElement("div");
+  recaptchaDiv.setAttribute("id", "sign-in-with-phone");
+  recaptchaDiv.setAttribute("class", "hidden");
+  const captcaContainer = document.getElementById("recaptcha-container");
+  captcaContainer?.appendChild(recaptchaDiv);
+
+  otpSent.value = true;
+
+  await sendOTP(customerPhone, (val: any) => {
+    authStore.setLoginConfirmationResult(val);
+  });
+  customerStore.setPhoneNumber(customerPhone);
+  otpSent.value = false;
+};
+
+watch(
+  () => authStore.loginConfirmationResult,
+  (confirmationResult) => {
+    console.log("loader", confirmationResult);
+    if (confirmationResult) {
+      console.log("OTP verification successful");
+      otpSent.value = false;
+      router.push("/otp");
+    }
+  }
+);
 </script>
 
 <template>
@@ -29,7 +68,13 @@ function submitHandler() {
       <ArrowLeft class="w-6 mt-6 ml-4" />
     </button>
     <div class="font-bold text-2xl mt-4 ml-4">Enter your mobile number to get OTP</div>
-    <Form @submit="submitHandler" :validation-schema="schema" v-slot="{ errors }">
+    <div  id="recaptcha-container">
+      <Form
+      id="recaptcha-container"
+      @submit="submitHandler"
+      :validation-schema="schema"
+      v-slot="{ errors }"
+    >
       <div class="mt-6 mx-8">
         <div class="relative mt-3">
           <Field
@@ -59,6 +104,8 @@ function submitHandler() {
         </button>
       </div>
     </Form>
+    </div>
+
   </div>
 </template>
 

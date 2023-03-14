@@ -7,6 +7,7 @@ export const useUserStore = defineStore("userStore", () => {
   const userRoles = ref<any>();
   const userIdToken = ref<any>();
   const loadingUser = ref<boolean>(true);
+  const phoneNumber = ref<string>("");
 
   //actions
   function setUser(firebaseUser: any) {
@@ -21,13 +22,18 @@ export const useUserStore = defineStore("userStore", () => {
   function setLoadingUser(loadingState: boolean) {
     loadingUser.value = loadingState;
   }
+  const setPhoneNumber = (phone: string) => {
+    phoneNumber.value = phone;
+  };
 
   return {
     user,
     userRoles,
+    phoneNumber,
     setUser,
     setUserRoles,
     setUserIdToken,
     setLoadingUser,
+    setPhoneNumber,
   };
 });

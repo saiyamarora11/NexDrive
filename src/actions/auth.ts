@@ -4,8 +4,8 @@ import {
   RecaptchaVerifier,
 } from "firebase/auth";
 
-
 //store
+import { useAuthStore } from "../store/auth";
 
 //imports
 import { auth } from "../firebase";
@@ -13,15 +13,17 @@ import { ref } from "vue";
 const verificationCode = ref<any>('');
 
 export const sendOTP = async (
-  phoneNumber: string
+  phoneNumber: string,
+  setConfirmationResult: any
 ) => {
+  const authStore = useAuthStore();
+
   try {
     const recaptchaVerifier = new RecaptchaVerifier(
       "sign-in-with-phone",
       {
         size: "invisible",
         callback: (response: any) => {
-          // reCAPTCHA solved, allow signInWithPhoneNumber.
         },
       },
       auth
@@ -31,10 +33,17 @@ export const sendOTP = async (
       phoneNumber,
       recaptchaVerifier
     );
-    localStorage.setItem('confirmationResult', JSON.stringify(confirmationResult));
-    console.log('OTP sent successfully!');
+    setConfirmationResult(confirmationResult);
+    authStore.toggleShowOTPSentLoader(false);
+    recaptchaVerifier.clear();
+    const recaptchaDiv = document.getElementById("sign-in-with-phone");
+    recaptchaDiv?.remove();
   } catch (err) {
     alert("Error sending otp");
+    console.log("otp not sent", err);
+    authStore.toggleOTPVerificationModal(false);
+    const recaptchaDiv = document.getElementById("sign-in-with-phone");
+    recaptchaDiv?.remove();
   }
 };
 

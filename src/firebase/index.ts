@@ -30,7 +30,7 @@ onAuthStateChanged(auth, async (user) => {
   userStore.setLoadingUser(false);
 
   if (!user && router.currentRoute.value.fullPath !== "/register") {
-    router.push("/login");
+    router.push("/phone");
   }
 });
 
