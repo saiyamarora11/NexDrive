@@ -52,7 +52,7 @@ watch(customerStore, (updatedStore) => {
     <div class="mt-6">
       <v-otp-input
         ref="otpInput"
-        input-classes="otp-input input w-12 h-12"
+        input-classes="otp-input input w-12 h-12 text-xl"
         separator="&nbsp&nbsp"
         :num-inputs="6"
         :should-auto-focus="true"
@@ -61,15 +61,13 @@ watch(customerStore, (updatedStore) => {
         @on-complete="handleOnComplete"
       />
     </div>
-    <div class="mx-8">
-      <button
-        id="sign-in-with-phone"
-        class="w-full btn bg-emerald-500 hover:bg-emerald-500 h-10 rounded-lg"
-        type="submit"
-      >
-        Contine
-      </button>
-    </div>
+
+    <button
+      class="w-11/12 mt-4 btn btn-blue rounded-lg"
+      type="submit"
+    >
+      Contine
+    </button>
   </form>
 </template>
 
