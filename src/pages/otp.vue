@@ -61,13 +61,15 @@ watch(customerStore, (updatedStore) => {
         @on-complete="handleOnComplete"
       />
     </div>
-    <button
-      id="sign-in-with-phone"
-      class="w-11/12 btn btn-blue font-bold mt-6"
-      type="submit"
-    >
-      Contine
-    </button>
+    <div class="mx-8">
+      <button
+        id="sign-in-with-phone"
+        class="w-full btn bg-emerald-500 hover:bg-emerald-500 h-10 rounded-lg"
+        type="submit"
+      >
+        Contine
+      </button>
+    </div>
   </form>
 </template>
 

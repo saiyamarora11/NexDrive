@@ -31,7 +31,7 @@ const submitHandler = async () => {
 
   otpSent.value = true;
 
-  await sendOTP("+919873169858", (val: any) => {
+  await sendOTP("+919667338493", (val: any) => {
     authStore.setLoginConfirmationResult(val);
   });
   customerStore.setPhoneNumber(customerPhone);
@@ -59,7 +59,7 @@ watch(
     <div class="font-bold text-2xl mt-4 ml-4">Enter your mobile number to get OTP</div>
     <div id="recaptcha-container">
       <Form id="recaptcha-container" @submit="submitHandler" v-slot="{ errors }">
-        <div class="mt-6 mx-8">
+        <div class="mt-6 mx-4">
           <div class="relative mt-3">
             <Field
               v-model="phoneNo"
@@ -79,7 +79,7 @@ watch(
           </div>
         </div>
         <ErrorMessage name="phoneNo" class="validation-error ml-10" />
-        <div class="mt-6 mx-8">
+        <div class="mt-6 mx-4">
           <button
             class="w-full btn bg-emerald-500 hover:bg-emerald-500 h-10 rounded-lg"
             type="submit"
