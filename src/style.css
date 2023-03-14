@@ -1,0 +1,268 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* font-family: "Poppins", sans-serif; */
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  /* background-color: #fcfcfc; */
+  background-color: #ffffff;
+  color: #313131;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  padding: 0;
+  margin: 0;
+  overscroll-behavior-y: contain;
+}
+.vs__search {
+  height: 30px !important;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+.vs__dropdown-option {
+  text-transform: capitalize !important;
+}
+
+.vs__selected {
+  text-transform: capitalize !important;
+}
+
+.vue-skeletor {
+  background-color: #ececec !important;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+/* Change the white to any color */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  color: black;
+  box-shadow: 0 0 0 30px white inset !important;
+  -webkit-box-shadow: 0 0 0 30px white inset !important;
+}
+
+/*Change text in autofill textbox*/
+input:-webkit-autofill {
+  -webkit-text-fill-color: black !important;
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.hidescroll::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.hidescroll {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+span,
+label,
+a {
+  -webkit-user-select: none; /* Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* IE10+/Edge */
+  user-select: none; /* Standard */
+}
+
+input::placeholder {
+  color: #64748b !important;
+  font-weight: 400 !important;
+  opacity: 0.7;
+  text-transform: none;
+}
+
+/* Custom Tailwind */
+
+@layer base {
+  h1 {
+    @apply text-2xl font-bold text-center;
+  }
+  label {
+    @apply mb-1 inline-block text-[0.75rem] md:text-sm font-medium;
+  }
+}
+
+@layer components {
+  /* Layout Components Start */
+  .steps-container {
+    @apply p-2;
+  }
+
+  .container-desktop {
+    @apply w-9/12 mx-auto;
+  }
+
+  .container-mobile {
+    @apply w-11/12 mx-auto;
+  }
+
+  .container-center {
+    @apply flex flex-col items-center;
+  }
+
+  .btm-nav {
+    @apply bg-green-500;
+  }
+
+  .btm-nav-active {
+    @apply bg-green-700;
+  }
+
+  .navbar {
+    @apply fixed top-0 left-0 w-full text-white bg-emerald-600;
+  }
+
+  .modal-box {
+    @apply bg-white;
+  }
+
+  /* Layout Components End */
+
+  /* Button Custom  Styles Start */
+
+  .btn {
+    @apply !min-h-fit h-10 border-0 focus:outline-none focus:ring-0 normal-case leading-tight font-medium rounded;
+  }
+
+  .btn[disabled] {
+    @apply bg-gray-100 border-0 !text-gray-500 !min-h-fit;
+  }
+
+  .btn-shadow {
+    @apply shadow-md;
+  }
+
+  .btn-emerald {
+    @apply text-white shadow-md bg-emerald-600 active:bg-emerald-700 focus:bg-emerald-600 hover:bg-emerald-600;
+  }
+
+  .btn-blue {
+    @apply text-white bg-blue-500 shadow-md active:bg-blue-600 focus:bg-blue-500 hover:bg-blue-500;
+  }
+
+  .btn-red {
+    @apply text-white bg-red-500 shadow-md active:bg-red-600 focus:bg-red-500 hover:bg-red-500;
+  }
+
+  .btn-confirm {
+    @apply h-12 text-lg font-bold shadow-md btn btn-emerald;
+  }
+
+  /* Button Custom  Styles End */
+
+  /* Form Styles Start */
+
+  .input {
+    @apply w-full px-2 pb-0 text-sm text-current bg-white border border-gray-300 rounded-md min-h-fit h-9 focus-visible:outline-0;
+  }
+
+  .input[disabled] {
+    @apply text-gray-500 bg-gray-100 border-0;
+  }
+
+  .validation-error {
+    @apply mt-1 text-xs text-red-500;
+  }
+
+  /* Form Styles End */
+
+  /* Link Custom Styles Start */
+  .link[disabled] {
+    @apply text-gray-500;
+  }
+
+  .link-green {
+    @apply text-green-600 active:text-green-700 hover:text-green-500;
+  }
+  /* Link Custom Styles End */
+
+  /* Spinner Custom Styles Start */
+
+  .green-spin {
+    @apply fill-green-600;
+  }
+
+  .white-spin {
+    @apply fill-white;
+  }
+
+  .emerald-spin {
+    @apply fill-emerald-600;
+  }
+
+  .spinner-lg {
+    @apply w-8 h-8;
+  }
+
+  .spinner-md {
+    @apply w-6 h-6;
+  }
+
+  .spinner-sm {
+    @apply w-2 h-2;
+  }
+
+  /* Spinner Custom Styles End */
+
+  /* Table */
+
+  .table :where(thead, tfoot) :where(th, td) {
+    @apply bg-[#EEEEEE] normal-case text-sm;
+  }
+  .table :where(tbody th, tbody td) {
+    @apply bg-[#F8F9F8] border-b border-gray-200 text-sm;
+  }
+  .table th:first-child {
+    @apply relative;
+  }
+
+  /* List Styles Start */
+  .menu :where(li:not(.menu-title):not(:empty)) > :where(*:not(ul):focus) {
+    @apply bg-transparent;
+  }
+  .menu :where(li:not(.menu-title):not(:empty)) > :where(*:not(ul):hover) {
+    @apply bg-transparent;
+  }
+  .menu :where(li:not(.menu-title):not(:empty)) > :where(*:not(ul):active) {
+    @apply bg-transparent text-[#313131];
+  }
+  /* List Styles End */
+
+  .modal {
+    background-color: rgba(0, 0, 0, 0.7);
+  }
+}

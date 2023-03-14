@@ -1,0 +1,41 @@
+{
+  "name": "ev",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "prod": "vite --host --mode production",
+    "build": "vue-tsc && vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@mapbox/mapbox-gl-geocoder": "^5.0.1",
+    "@turf/turf": "^6.5.0",
+    "@types/luxon": "^3.2.0",
+    "@types/mapbox-gl": "^2.7.10",
+    "@vueuse/core": "^9.13.0",
+    "axios": "^1.3.4",
+    "daisyui": "^2.51.3",
+    "firebase": "^9.17.2",
+    "mapbox-gl": "^2.13.0",
+    "pinia": "^2.0.32",
+    "vee-validate": "^4.7.4",
+    "vite-svg-loader": "^4.0.0",
+    "vue": "^3.2.45",
+    "vue-resizable": "^2.1.7",
+    "vue-router": "^4.1.6",
+    "yup": "^1.0.2"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^4.0.0",
+    "autoprefixer": "^10.4.13",
+    "postcss": "^8.4.21",
+    "tailwindcss": "^3.2.7",
+    "typescript": "^4.9.3",
+    "vite": "^4.1.0",
+    "vite-plugin-pages": "^0.28.0",
+    "vite-plugin-pwa": "^0.14.4",
+    "vue-tsc": "^1.0.24"
+  }
+}
