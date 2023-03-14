@@ -40,7 +40,7 @@ const disabledEmail = ref<boolean>(false);
         />
         <div
           @click="disabledName = true"
-          class="link no-underline text-emerald-500 text-sm font-semibold"
+          class="link no-underline text-blue-500 text-sm font-semibold"
         >
           EDIT
         </div>
@@ -49,13 +49,13 @@ const disabledEmail = ref<boolean>(false);
     <div v-if="disabledName" class="flex justify-between gap-x-2 mx-3 mt-5">
       <button
         @click="disabledName = false"
-        class="btn bg-emerald-500 hover:bg-emerald-500 w-1/2"
+        class="btn bg-blue-500 hover:bg-blue-500 w-1/2"
       >
         UPDATE
       </button>
       <button
         @click="disabledName = false"
-        class="btn btn-outline border border-emerald-500 hover:bg-emerald-500 text-emerald-500 w-1/2 font-semibold"
+        class="btn btn-outline border border-blue-500 hover:bg-blue-500 text-blue-500 w-1/2 font-semibold"
       >
         CANCEL
       </button>
@@ -72,7 +72,7 @@ const disabledEmail = ref<boolean>(false);
         />
         <div
           @click="disabledPhone = true"
-          class="link no-underline text-emerald-500 text-sm font-semibold"
+          class="link no-underline text-blue-500 text-sm font-semibold"
         >
           EDIT
         </div>
@@ -81,13 +81,13 @@ const disabledEmail = ref<boolean>(false);
     <div v-if="disabledPhone" class="flex justify-between gap-x-2 mx-3 mt-5">
       <button
         @click="disabledPhone = false"
-        class="btn bg-emerald-500 hover:bg-emerald-500 w-1/2"
+        class="btn bg-blue-500 hover:bg-blue-500 w-1/2"
       >
         UPDATE
       </button>
       <button
         @click="disabledPhone = false"
-        class="btn btn-outline border border-emerald-500 hover:bg-emerald-500 text-emerald-500 w-1/2 font-semibold"
+        class="btn btn-outline border border-blue-500 hover:bg-blue-500 text-blue-500 w-1/2 font-semibold"
       >
         CANCEL
       </button>
@@ -104,7 +104,7 @@ const disabledEmail = ref<boolean>(false);
         />
         <div
           @click="disabledEmail = true"
-          class="link no-underline text-emerald-500 text-sm font-semibold"
+          class="link no-underline text-blue-500 text-sm font-semibold"
         >
           EDIT
         </div>
@@ -113,13 +113,13 @@ const disabledEmail = ref<boolean>(false);
     <div v-if="disabledEmail" class="flex justify-between gap-x-2 mx-3 mt-5">
       <button
         @click="disabledEmail = false"
-        class="btn bg-emerald-500 hover:bg-emerald-500 w-1/2"
+        class="btn bg-blue-500 hover:bg-blue-500 w-1/2"
       >
         UPDATE
       </button>
       <button
         @click="disabledEmail = false"
-        class="btn btn-outline border border-emerald-500 hover:bg-emerald-500 text-emerald-500 w-1/2 font-semibold"
+        class="btn btn-outline border border-blue-500 hover:bg-blue-500 text-blue-500 w-1/2 font-semibold"
       >
         CANCEL
       </button>
