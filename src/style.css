@@ -220,8 +220,8 @@ input::placeholder {
     @apply fill-white;
   }
 
-  .emerald-spin {
-    @apply fill-emerald-600;
+  .blue-spin {
+    @apply fill-blue-600;
   }
 
   .spinner-lg {

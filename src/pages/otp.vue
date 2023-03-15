@@ -34,7 +34,7 @@ const submitHandler = async (e: Event) => {
 
 watch(customerStore, (updatedStore) => {
   if (updatedStore.user) {
-    router.replace("/dashboard");
+    router.replace("/createProfile");
   }
 });
 </script>

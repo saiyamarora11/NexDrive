@@ -1,5 +1,5 @@
 <script setup lang="ts">
-type SpinnerColors = "green-spin" | "white-spin" | "emerald-spin";
+type SpinnerColors = "green-spin" | "white-spin" | "blue-spin";
 type SpinnerSize = "spinner-lg" | "spinner-md" | "spinner-sm";
 
 type Props = {

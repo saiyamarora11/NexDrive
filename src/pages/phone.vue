@@ -34,9 +34,7 @@ const submitHandler = async () => {
   recaptchaDiv.setAttribute("class", "hidden");
   const captcaContainer = document.getElementById("recaptcha-container");
   captcaContainer?.appendChild(recaptchaDiv);
-
   otpSent.value = true;
-
   await sendOTP(countryCode.value + phoneNo.value, (val: any) => {
     authStore.setLoginConfirmationResult(val);
   });
@@ -62,12 +60,14 @@ watch(
     <button @click="() => router.go(-1)">
       <ArrowLeft class="w-6 mt-6 ml-4" />
     </button>
-    <img class="scale-[0.8]" src="../assets/otp.png" />
+    <img class="scale-[0.6]" src="../assets/otp.png" />
     <div class="font-bold text-xl flex justify-center">Otp Verification</div>
     <div class="flex justify-center mx-8">
-      <div class="text-slate-500  text-sm mt-2">We will send you an <span class="font-bold text-black">One Time Password </span>on this number</div>
+      <div class="text-slate-500 text-sm mt-2">
+        We will send you an <span class="font-bold text-black">One Time Password </span>on
+        this number
+      </div>
     </div>
-    
     <div id="recaptcha-container">
       <Form id="recaptcha-container" @submit="submitHandler" v-slot="{ errors }">
         <div class="mt-6 mx-4">
@@ -91,12 +91,9 @@ watch(
         </div>
         <ErrorMessage name="phoneNo" class="validation-error ml-10" />
         <div class="mt-6 mx-4">
-          <button
-            class="w-full btn btn-blue  h-10 rounded-lg"
-            type="submit"
-          >
+          <button class="w-full btn btn-blue h-10 rounded-lg" type="submit">
             <p v-if="!otpSent">Get OTP</p>
-            <Spinner v-else :color="'emerald-spin'" :size="'spinner-md'" />
+            <Spinner v-else :color="'blue-spin'" :size="'spinner-md'" />
           </button>
         </div>
       </Form>
