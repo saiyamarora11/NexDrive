@@ -11,17 +11,14 @@ import { useMapStore } from "../../store/mapStore";
 import { getLocation } from "../../utils/map";
 import { evData } from "../../data/data";
 
-
-
 const mapStore = useMapStore();
 
 const defaultCoords = ref({
   lat: 28.509379,
   lng: 77.08394,
 });
-
 const coords = ref<any>();
-
+const markers = ref<any>();
 onMounted(async () => {
   mapboxgl.accessToken =
     "pk.eyJ1IjoidXNhaWYxMzExIiwiYSI6ImNsZDdoc3J6NDBlenkzcXBiOTEzZml1cDcifQ.vj73_blmjljI0sUEHAwOcw";
@@ -36,8 +33,8 @@ onMounted(async () => {
   mapStore.map.on("load", () => {
     mapStore.maploader = false;
   });
-
-  evData.forEach((marker:any, index:any) => {
+  mapStore.filterMarkers = evData;
+  mapStore.filterMarkers.forEach((marker: any, index: any) => {
     const el = document.createElement("div");
     el.className = `marker marker-${index}`;
     el.style.backgroundImage = `url('src/assets/${marker.type}.png')`;
@@ -63,12 +60,53 @@ onMounted(async () => {
             </div>
           </div>
         </div>`);
-    new mapboxgl.Marker(el)
+    markers.value = new mapboxgl.Marker(el)
       .setLngLat([Number(marker?.longitude), Number(marker?.lattitude)])
       .setPopup(popup)
       .addTo(mapStore.map!);
   });
 });
+watch(
+  () => mapStore.filterMarkers,
+  () => {
+    console.log(mapStore.filterMarkers);
+
+    markers.value.forEach(function (marker: any) {
+      marker.remove();
+    });
+    mapStore.filterMarkers.forEach((marker: any, index: any) => {
+      const el = document.createElement("div");
+      el.className = `marker marker-${index}`;
+      el.style.backgroundImage = `url('src/assets/${marker.type}.png')`;
+      el.style.width = "20px";
+      el.style.height = "27px";
+      const popup = new mapboxgl.Popup({ offset: 25 }).setHTML(`<div class="">
+          <div>
+            <div class="m-2 font-normal"><span class="font-bold">Name</span>
+
+              ${marker?.name} 
+              <br>
+            </div>
+            <div class="m-2 font-normal"><span class="font-bold">Address:  </span>
+              ${marker?.address}
+              <br>
+            </div>
+            <div class="m-2 font-normal"><span class="font-bold">Company:  </span>
+
+                 ${marker?.type}
+              <br>
+            </div>
+            <div href="https://www.google.com/maps/dir/?api=1&destination=238%20Bedford%20Ave%2C%20Brooklyn%2C%20NY%2C%2011249%2C%20United%20States" class="m-2 link text-blue-500">Get Direction<br></div>
+            </div>
+          </div>
+        </div>`);
+      new mapboxgl.Marker(el)
+        .setLngLat([Number(marker?.longitude), Number(marker?.lattitude)])
+        .setPopup(popup)
+        .addTo(mapStore.map!);
+    });
+  }
+);
 </script>
 
 <template>

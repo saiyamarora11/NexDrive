@@ -1,8 +1,8 @@
 <script setup lang="ts">
 //dependencies
-import { ref, onMounted } from "vue";
-import { useRouter } from "vue-router";
+import { ref, onMounted, computed } from "vue";
 import Map from "../components/common/Map.vue";
+import * as turf from "@turf/turf";
 
 //store,actions
 import { useMapStore } from "../store/mapStore";
@@ -12,18 +12,31 @@ import Person from "../assets/person.svg?component";
 import Electricity from "../assets/icons.svg?component";
 import { evData } from "../data/data";
 import { distance } from "../data/distance";
-import Direction from "../assets/directions.svg?component";
 import Pin from "../assets/marker.svg?component";
 
-const router = useRouter();
 const mapStore = useMapStore();
 
-const currentFilter = ref<string>();
+const defaultCoords = ref({
+  lat: 31.202821,
+  lng: 77.028214,
+});
+
+var distanceFilter = ref<any>("100");
 
 function panToMarker(card: any) {
   const longitude: any = card?.longitude;
   const latitude: any = card?.lattitude;
   return mapStore.map.panTo([longitude, latitude]);
+}
+
+function filterMarkers(radii: any) {
+  mapStore.filterMarkers = evData.filter((marker) => {
+    const distance = turf.distance(
+      [defaultCoords.value.lng, defaultCoords.value.lat],
+      [Number(marker?.longitude), Number(marker?.lattitude)]
+    );
+    return distance <= radii;
+  });
 }
 </script>
 
@@ -50,13 +63,20 @@ function panToMarker(card: any) {
         </router-link>
       </div>
     </div>
-
     <div
       class="w-full absolute top-10 left-0 md:left-4 mt-10 shadow-xl flex flex-row gap-x-4 overflow-x-scroll hidescroll mx-4"
     >
       <button
         v-for="filter in distance"
-        class="btn btn-sm bg-white text-black text-xs active:bg-yellow-100 active:text-yellow-700 hover:border hover:border-yellow-700 font-semibold hover:bg-yellow-100 hover:text-yellow-700 min-w-[5rem] max-h-6 rounded-md"
+        :key="filter.value"
+        :value="filter.value"
+        :class="
+          filter.value == distanceFilter.value
+            ? 'bg-yellow-100 text-yellow-700 text-yellow-700'
+            : ''
+        "
+        class="btn btn-sm bg-white text-black text-xs font-semibold min-w-[5rem] max-h-6 rounded-md"
+        @click="filterMarkers(filter.value)"
       >
         {{ filter?.title }}
       </button>
@@ -66,7 +86,7 @@ function panToMarker(card: any) {
       class="w-full absolute bottom-8 flex flex-row gap-x-1 overflow-y-hidden overflow-x-scroll hidescroll mx-2"
     >
       <div
-        v-for="charger in evData"
+        v-for="charger in mapStore.filterMarkers"
         key="charger.id"
         class="flex flex-col items-start px-3"
         @click="panToMarker(charger)"

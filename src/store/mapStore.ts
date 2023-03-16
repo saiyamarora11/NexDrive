@@ -1,12 +1,14 @@
 import { defineStore } from "pinia";
 import { ref } from "vue";
 
+
 export const useMapStore = defineStore("mapStore", () => {
 
   //state
   const map = ref<any>();
   const maploader = ref<boolean>(true);
   const formattedAddress = ref<string>("");
+  const filterMarkers = ref<any[]>([]);
 
 
   //actions
@@ -20,6 +22,7 @@ export const useMapStore = defineStore("mapStore", () => {
    map,
    maploader,
    formattedAddress,
+   filterMarkers,
    toggleMaploader,
    setFormattedAddress,
   };

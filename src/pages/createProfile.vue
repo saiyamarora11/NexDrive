@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import router from "../router";
+//dependencies
 
 //imports
 import ArrowLeft from "../assets/arrow-left.svg?component";
