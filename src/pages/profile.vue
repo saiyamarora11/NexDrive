@@ -21,7 +21,7 @@ const disabledEmail = ref<boolean>(false);
 </script>
 
 <template>
-  <div class="flex flex-col h-[100vh-4rem]">
+  <div class="flex flex-col h-[calc(100vh-4rem)]">
     <div class="flex gap-x-3 mt-4 border-b pb-4">
       <button @click="() => router.go(-1)">
         <ArrowLeft class="w-6 ml-4" />

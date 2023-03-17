@@ -32,7 +32,7 @@ function panToMarker(card: any) {
 function filterMarkers(radii: any) {
   mapStore.filterMarkers = evData.filter((marker) => {
     const distance = turf.distance(
-      [defaultCoords.value.lng, defaultCoords.value.lat],
+      [defaultCoords?.value?.lng, defaultCoords?.value?.lat],
       [Number(marker?.longitude), Number(marker?.lattitude)]
     );
     return distance <= radii;
@@ -42,7 +42,7 @@ function filterMarkers(radii: any) {
 
 <template>
   <div class="relative overflow-hidden">
-    <div class="relative h-[100vh]">
+    <div class="relative h-[calc(100vh-4rem)]">
       <Map class="" />
     </div>
     <div class="absolute w-full md:w-[36.5rem] left-0 md:left-4 top-6 shadow-xl">
@@ -81,7 +81,6 @@ function filterMarkers(radii: any) {
         {{ filter?.title }}
       </button>
     </div>
-
     <div
       class="w-full absolute bottom-8 flex flex-row gap-x-1 overflow-y-hidden overflow-x-scroll hidescroll mx-2"
     >

@@ -64,6 +64,7 @@ onMounted(async () => {
       .setLngLat([Number(marker?.longitude), Number(marker?.lattitude)])
       .setPopup(popup)
       .addTo(mapStore.map!);
+      console.log(markers.value);
   });
 });
 watch(
@@ -71,9 +72,11 @@ watch(
   () => {
     console.log(mapStore.filterMarkers);
 
-    markers.value.forEach(function (marker: any) {
-      marker.remove();
+    Object.keys(markers.value).forEach(function (marker: any) {
+      console.log(marker.value);
+      marker.value.remove();
     });
+    
     mapStore.filterMarkers.forEach((marker: any, index: any) => {
       const el = document.createElement("div");
       el.className = `marker marker-${index}`;

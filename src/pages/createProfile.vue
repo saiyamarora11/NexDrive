@@ -1,9 +1,12 @@
 <script setup lang="ts">
+import { ref } from "vue";
 import router from "../router";
 //dependencies
 
 //imports
 import ArrowLeft from "../assets/arrow-left.svg?component";
+
+const name = ref<string>("");
 </script>
 
 <template>
@@ -14,18 +17,48 @@ import ArrowLeft from "../assets/arrow-left.svg?component";
       </button>
       <div class="font-semibold text-sm mt-1">Create Profile</div>
     </div>
-    <img class="scale-[0.5]" src="../assets/createProfile.png" />
-    <div class="relative">
+    <div class="flex justify-center mt-4">
+      <img class="w-40 h-40" src="../assets/createProfile.png" />
+    </div>
+
+    <div class="relative mt-8">
       <input
+        v-model="name"
         placeholder="Name"
+        class="w-full border-blue-500 border rounded-md py-2 px-4 bg-white focus:outline-none"
+        type="name"
+        autocomplete="off"
+      />
+      <label
+        class="absolute left-0 -top-3.5 text-blue-500 text-sm bg-white px-1.5 text-blue-500 text-sm"
+      >
+        Enter Full Name
+      </label>
+    </div>
+    <div class="relative mt-8">
+      <input
+        placeholder="Number"
         class="w-full border-blue-500 border rounded-md py-2 px-4 bg-white focus:outline-none"
         type="number"
         autocomplete="off"
       />
       <label
-        class="absolute left-0 -top-3.5 text-blue-500 text-sm bg-white px-1.5 text-blue-500"
+        class="absolute left-0 -top-3.5 text-blue-500 text-sm bg-white px-1.5 text-blue-500 text-sm"
       >
-        Enter Full Name
+        Phone Number
+      </label>
+    </div>
+    <div class="relative mt-8">
+      <input
+        placeholder="Email"
+        class="w-full border-blue-500 border rounded-md py-2 px-4 bg-white focus:outline-none"
+        type="email"
+        autocomplete="off"
+      />
+      <label
+        class="absolute left-0 -top-3.5 text-blue-500 text-sm bg-white px-1.5 text-blue-500 text-sm"
+      >
+        Email
       </label>
     </div>
     <div class="text-xs text-slate-500 mt-4">Gender (Optional)</div>

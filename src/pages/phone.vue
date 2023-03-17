@@ -60,17 +60,20 @@ watch(
     <button @click="() => router.go(-1)">
       <ArrowLeft class="w-6 mt-6 ml-4" />
     </button>
-    <img class="scale-[0.6]" src="../assets/otp.png" />
-    <div class="font-bold text-xl flex justify-center">Otp Verification</div>
-    <div class="flex justify-center mx-8">
-      <div class="text-slate-500 text-sm mt-2">
+    <div class="flex justify-center">
+      <img class="w-60 h-60" src="../assets/otp.png" />
+    </div>
+
+    <div class="font-bold text-xl flex justify-center mt-20">Otp Verification</div>
+    <div class="flex justify-center mx-4">
+      <div class="text-slate-500 text-sm mt-2 text-center">
         We will send you an <span class="font-bold text-black">One Time Password </span>on
         this number
       </div>
     </div>
     <div id="recaptcha-container">
       <Form id="recaptcha-container" @submit="submitHandler" v-slot="{ errors }">
-        <div class="mt-6 mx-4">
+        <div class="mt-20 mx-4">
           <div class="relative mt-3">
             <Field
               v-model="phoneNo"
@@ -90,7 +93,7 @@ watch(
           </div>
         </div>
         <ErrorMessage name="phoneNo" class="validation-error ml-10" />
-        <div class="mt-6 mx-4">
+        <div class="mt-5 mx-4">
           <button class="w-full btn btn-blue h-10 rounded-lg" type="submit">
             <p v-if="!otpSent">Get OTP</p>
             <Spinner v-else :color="'blue-spin'" :size="'spinner-md'" />
